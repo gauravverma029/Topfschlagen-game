@@ -1,0 +1,56 @@
+html {
+  font-family: sans-serif;
+}
+
+#topfschlagen-wrapper {
+  width: 500px;
+  height: 600px;
+  background-color: black;
+  margin: 0 auto;
+  cursor: pointer;
+}
+.hot {
+  display: none;
+}
+.cold {
+  display: none;
+}
+.win {
+  display: none;
+}
+.modal {
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+}
+
+.modal-content {
+  margin: 15% auto; /* 15% from the top and centered */
+  border: 1px solid #888;
+  width: 50%; /* Could be more or less, depending on screen size */
+  text-align: center;
+  font-size: 30px;
+  background-color: green;
+  color: white;
+}
+.pot {
+  width: 20px;
+  height: 20px;
+  position: relative;
+  background-color: black;
+  z-index: 1;
+  top: 20px;
+  left: 30px;
+}
+@keyframes anim {
+  from {
+    box-shadow: rgba(244, 67, 54, 1) 0px 0px 0px 0px;
+  }
+  to {
+    box-shadow: rgba(244, 67, 54, 0) 0px 0px 0px 14px;
+  }
+}
