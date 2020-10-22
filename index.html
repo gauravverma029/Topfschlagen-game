@@ -1,34 +1,35 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Understanding TypeScript</title>
-    <script
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCIaAc2c5M3VpbCH6PPq_guwy9lHuowXOs"
-      async
-      defer
-    ></script>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>Topfschlagen Game</title>
     <script src="dist/bundle.js" defer></script>
     <link rel="stylesheet" href="app.css" />
+   
   </head>
   <body>
     <template class='topfschlagen' id='topfschlagen'>
        <div id='topfschlagen-wrapper'>
+        <div class='spoon'>
+
+        </div>
         <div class='pot' >
         </div>
         <div class='hot'>
          <div class='modal'>
           <div class="modal-content">
-            <p>HOT 😅</p>
+            <p style='font-size:100px'>&#127774;</p>
+            <p>Hot</p>
           </div>
         </div>
         </div>
         <div class='cold'>
            <div class='modal'>
             <div class="modal-content">
-              <p>Cold 😄</p>
+              <p style='font-size:100px'>&#9924;</p>
+              <p>Cold</p>
             </div>
            </div>
         </div>
@@ -36,14 +37,20 @@
           <div class='modal'>
             <div class="modal-content">
               <div class='winner'>
-                You are winner !!!!
+                <p style='font-size:200px'>&#129351;</p>
+              </div>
+               <div style='color:white'>
+                  You Are Winner !!!!
               </div>
               <div class='totalClick'>
               </div>
+             
             </div>
           </div>
         </div>
-       </div>
+        <audio id="floorhitAudio" src="/src/static/bump.wav"></audio>
+        <audio id="winnerAudio" src="/src/static/winner.mp3"></audio>
+      </div>
     </template>
     <div id='add'></div>
   </body>

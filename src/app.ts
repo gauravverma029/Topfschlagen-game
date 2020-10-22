@@ -8,6 +8,9 @@ class Topfschlagen {
   winDivElement: HTMLDivElement;
   winnerDivElement: HTMLDivElement;
   totalClickDivElement: HTMLDivElement;
+  spoonDivElement: HTMLDivElement;
+  floorhitAudioElement: HTMLAudioElement;
+  winnerAudioElement: HTMLAudioElement;
   potClientX: number;
   potClientY: number;
   prvClickValue: number;
@@ -28,6 +31,17 @@ class Topfschlagen {
     this.hotDivElement = this.element.querySelector('.hot') as HTMLDivElement;
     this.coldDivElement = this.element.querySelector('.cold') as HTMLDivElement;
     this.winDivElement = this.element.querySelector('.win') as HTMLDivElement;
+    this.spoonDivElement = this.element.querySelector(
+      '.spoon'
+    ) as HTMLDivElement;
+
+    this.floorhitAudioElement = this.element.querySelector(
+      '#floorhitAudio'
+    ) as HTMLAudioElement;
+
+    this.winnerAudioElement = this.element.querySelector(
+      '#winnerAudio'
+    ) as HTMLAudioElement;
 
     this.winnerDivElement = this.element.querySelector(
       '.winner'
@@ -52,9 +66,12 @@ class Topfschlagen {
 
   private hitPot(event: MouseEvent) {
     event.preventDefault();
-    this.totalClickDivElement.innerHTML = `<p>Total Click : ${this.totalClick} </p>`;
+    this.winnerAudioElement.play();
+    this.totalClickDivElement.innerHTML = `<p>Total Attempts - ${this.totalClick} </p>`;
+    this.potDivElement.style.backgroundImage = "url('./src/static/pot.png')";
     this.winDivElement.style.display = 'block';
-    this.potDivElement.style.backgroundColor = 'red';
+    this.spoonDivElement.style.display = 'none';
+    this.element.style.cursor = 'pointer';
     this.potHitted = true;
   }
 
@@ -62,6 +79,7 @@ class Topfschlagen {
     event.preventDefault();
     let actualHitFloorX = event.clientX;
     let actualHitFloorY = event.clientY;
+    this.floorhitAudioElement.play();
     const powerOfX = Math.pow(this.potClientX - actualHitFloorX, 2);
     const PowerofY = Math.pow(this.potClientY - actualHitFloorY, 2);
     const sqrtValueOfhitFloorClient = Math.sqrt(powerOfX + PowerofY);
@@ -71,6 +89,9 @@ class Topfschlagen {
         this.hotDivElement.style.display = 'block';
         setTimeout(() => {
           this.hotDivElement.style.display = 'none';
+
+          this.floorhitAudioElement.pause();
+          this.floorhitAudioElement.currentTime = 0;
         }, 500);
       } else if (
         !this.potHitted &&
@@ -79,6 +100,8 @@ class Topfschlagen {
         this.coldDivElement.style.display = 'block';
         setTimeout(() => {
           this.coldDivElement.style.display = 'none';
+          this.floorhitAudioElement.pause();
+          this.floorhitAudioElement.currentTime = 0;
         }, 500);
       }
     }
@@ -91,8 +114,8 @@ class Topfschlagen {
   }
 
   private setPotOnDynamicPosition() {
-    this.potDivElement.style.top = this.getRandomInt(80) + '%';
-    this.potDivElement.style.left = this.getRandomInt(80) + '%';
+    this.potDivElement.style.top = this.getRandomInt(90) + '%';
+    this.potDivElement.style.left = this.getRandomInt(90) + '%';
     const clientRect = this.potDivElement.getBoundingClientRect();
     const clientX = clientRect.left;
     const clientY = clientRect.top;
@@ -100,9 +123,17 @@ class Topfschlagen {
     this.potClientY = clientY;
   }
 
+  private captureMovement(event: MouseEvent) {
+    let clientX = event.clientX;
+    let clientY = event.clientY;
+    this.spoonDivElement.style.top = clientY + 1 + 'px';
+    this.spoonDivElement.style.left = clientX + 'px';
+  }
+
   private configure() {
     this.potDivElement.addEventListener('click', this.hitPot.bind(this));
     this.element.addEventListener('click', this.hitFloor.bind(this));
+    this.element.addEventListener('mousemove', this.captureMovement.bind(this));
   }
 }
 

@@ -1,19 +1,38 @@
 html {
   font-family: sans-serif;
 }
+ body {
+    cursor: none;
+}
+
 
 #topfschlagen-wrapper {
-  width: 500px;
-  height: 600px;
+  width: 100vw;
+  min-height: 100vh;
   background-color: black;
   margin: 0 auto;
-  cursor: pointer;
+ 	cursor: none;
 }
+.spoon {
+    position: absolute;
+    top: 35px;
+    left: 35px;
+    width: 100px;
+    height:100px;
+    transform-origin: 100px 100px 0;
+    background-image: url('./src/static/spoon.png');
+    background-size: cover;
+}
+
 .hot {
   display: none;
+  color:red;
+
 }
 .cold {
   display: none;
+  color:blue;
+
 }
 .win {
   display: none;
@@ -30,22 +49,21 @@ html {
 
 .modal-content {
   margin: 15% auto; /* 15% from the top and centered */
-  border: 1px solid #888;
   width: 50%; /* Could be more or less, depending on screen size */
   text-align: center;
-  font-size: 30px;
-  background-color: green;
-  color: white;
+  font-size: 50px;
 }
 .pot {
-  width: 20px;
-  height: 20px;
-  position: relative;
-  background-color: black;
-  z-index: 1;
-  top: 20px;
-  left: 30px;
+  width: 100px;
+  height: 100px;
+  position: absolute;
+  background-size: cover;
+  background-color:transparent;
 }
+.totalClick{
+color: white;
+}
+
 @keyframes anim {
   from {
     box-shadow: rgba(244, 67, 54, 1) 0px 0px 0px 0px;
